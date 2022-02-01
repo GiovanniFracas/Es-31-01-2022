@@ -1,14 +1,11 @@
 var valore1;
 var valore2;
-var result;
-var result2;
-var risultato;
 var numeroRand;
 var confronto;
 var confronto2;
 var uguale = false;
 $(function () {
-    numeroRand = Math.floor(Math.random() * 100);
+    numeroRand = (Math.floor(Math.random() * 100));
     console.log(numeroRand);
     $('#Restart').hide();
     $('#verifica').on('click', function () {
@@ -16,46 +13,34 @@ $(function () {
         $('#inizio').html('il numero da indovinare era: ' + numeroRand);
         valore1 = Number($('#p1').val());
         valore2 = Number($('#p2').val());
-        if (valore1 != 0 && valore2 != 0) {
-            result = valore1;
-            result2 = valore2;
-        }
-        confronto = result - numeroRand;
-        confronto2 = result2 - numeroRand;
+        confronto = Math.abs(valore1 - numeroRand);
+        confronto2 = Math.abs(valore2 - numeroRand);
         console.log('primo confronto ' + confronto);
         console.log('primo confronto ' + confronto2);
-        if (confronto < 0) {
-            confronto *= -1;
-        }
-        if (confronto2 < 0) {
-            confronto2 *= -1;
-        }
-        if (result == numeroRand) {
-            $('#finale').html('ha vinto il giocatore 1');
+        if (valore1 == numeroRand) {
+            $('#finale').html('Il giocatore 1 ha indovinato');
             uguale = true;
         }
-        if (result2 == numeroRand) {
-            $('#finale').html('ha vinto il giocatore 2');
+        if (valore2 == numeroRand) {
+            $('#finale').html('Il giocatore 2 ha indovinato');
             uguale = true;
         }
-        if (confronto < confronto2 && uguale == false) {
-            console.log('nessuno ha indovinato ma ha vinto il giocatore 1');
-            $('#finale').html('nessuno ha indovinato ma il giocatore 1 si è avvicinato di più');
+        if (confronto < confronto2 && !uguale) {
+            $('#finale').html('Nessuno ha indovinato ma il giocatore 1 si è avvicinato di più');
         }
-        if (confronto > confronto2 && uguale == false) {
-            console.log('nessuno ha indovinato ma ha vinto il giocatore 2');
-            $('#finale').html('nessuno ha indovinato ma il giocatore 2 si è avvicinato di più');
+        if (confronto > confronto2 && !uguale) {
+            $('#finale').html('Nessuno ha indovinato ma il giocatore 2 si è avvicinato di più');
         }
-        if (confronto == confronto2 && uguale == false) {
-            $('#finale').html('la distanza tra i numeri è la stessa');
+        if (confronto == confronto2 && !uguale) {
+            $('#finale').html('La distanza tra i numeri è la stessa');
             if (valore1 == valore2) {
-                $('#finale').html('avete messo gli stessi numeri e non avete vinto');
+                $('#finale').html('Avete messo gli stessi numeri e non avete indovinato');
             }
         }
-        if (confronto == confronto2 && uguale == true) {
-            $('#finale').html('la distanza tra i numeri è la stessa');
+        if (confronto == confronto2 && uguale) {
+            $('#finale').html('La distanza tra i numeri è la stessa');
             if (valore1 == valore2) {
-                $('#finale').html('avete messo gli stessi numeri e avete vinto');
+                $('#finale').html('Avete messo gli stessi numeri e avete indovinato');
             }
         }
     });
